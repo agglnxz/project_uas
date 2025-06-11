@@ -35,7 +35,7 @@ class AntrianPosisi {
       for (var pemain in tim.daftarPemain) {
         if (pemain.nama == nama) {
           pemain.posisi = posisiBaru;
-          print("Pemain $nama sekarang menjadi $posisiBaru di tim ${tim.namaTim}.");
+          print("Pemain $nama sekarang menjadi $posisiBaru di ${tim.namaTim}.");
           return;
         }
       }
