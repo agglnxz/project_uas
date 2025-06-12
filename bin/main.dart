@@ -1,24 +1,29 @@
 // main.dart
 import 'dart:io';
 
-import 'data_tim.dart';
+import 'package:project_uas/data_tim.dart';
+import 'package:project_uas/class_tim.dart';
+
+import 'tambah_tim.dart';
+import 'tambah_pemain.dart';
 import 'jadwal_latihan.dart';
-import 'antrian_posisi.dart';
+//import 'antrian_posisi.dart';
 import 'riwayat_latihan.dart';
 
+
 void main() {
-  List<Tim> daftarTim = inisialisasiTim();
+  DataTim data = DataTim();
   JadwalLatihan jadwalLatihan = JadwalLatihan();
-  AntrianPosisi antrian = AntrianPosisi();
+  //AntrianPosisi antrian = AntrianPosisi();
   RiwayatLatihan riwayat = RiwayatLatihan();
 
   while (true) {
     print('\n=== MENU UTAMA ===');
-    print('1. Lihat Daftar Tim & Pemain');
-    print('2. Lihat Jadwal Latihan');
-    print('3. Tambah Jadwal Latihan');
-    print('4. Tambah Antrian Ganti Posisi');
-    print('5. Proses Antrian Ganti Posisi');
+    print('1. Tambah Tim');
+    print('2. Tambah Pemain ke Tim');
+    print('3. Lihat Daftar Tim');
+    print('4. ');
+    print('5. ');
     print('6. Tandai Latihan Selesai');
     print('7. Lihat Riwayat Latihan');
     print('0. Keluar');
@@ -27,19 +32,20 @@ void main() {
 
     switch (pilihan) {
       case '1':
-        tampilkanTim(daftarTim);
+        tambahTim(data);
+        
         break;
       case '2':
-        jadwalLatihan.tampilkan();
+        tambahPemainKeTim(data);
         break;
       case '3':
-        tambahJadwalInteraktif(jadwalLatihan);
+        tampilkanDaftarTim(data);
         break;
       case '4':
-        tambahAntrianInteraktif(antrian);
+       
         break;
       case '5':
-        antrian.prosesGantiPosisi(daftarTim);
+    
         break;
       case '6':
         tandaiLatihanSelesai(jadwalLatihan, riwayat);
