@@ -1,17 +1,18 @@
 class RiwayatLatihan {
-  List<String> _stack = [];
+  final List<dynamic> _riwayat = [];
 
-  void tambah(String keterangan) {
-    _stack.add(keterangan);
+  void tambahRiwayat(dynamic jadwal) {
+    _riwayat.add(jadwal);
   }
 
   void tampilkan() {
-    if (_stack.isEmpty) {
-      print("Belum ada riwayat latihan.");
+    if (_riwayat.isEmpty) {
+      print('Belum ada riwayat latihan.');
     } else {
-      print("\n=== Riwayat Latihan ===");
-      for (var i = _stack.length - 1; i >= 0; i--) {
-        print("- ${_stack[i]}");
+      print('=== Riwayat Latihan ===');
+      for (var i = 0; i < _riwayat.length; i++) {
+        var jadwal = _riwayat[i];
+        print('${i + 1}. Hari: ${jadwal.hari}, Jam: ${jadwal.jam}');
       }
     }
   }
