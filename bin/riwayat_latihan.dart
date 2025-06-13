@@ -10,9 +10,11 @@ class RiwayatLatihan {
       print('Belum ada riwayat latihan.');
     } else {
       print('=== Riwayat Latihan ===');
-      for (var i = 0; i < _riwayat.length; i++) {
+      for (var i = _riwayat.length - 1; i >= 0; i--) {
         var jadwal = _riwayat[i];
-        print('${i + 1}. Hari: ${jadwal.hari}, Jam: ${jadwal.jam}');
+        print(
+          '${_riwayat.length - i}. Hari: ${jadwal.hari}, Jam: ${jadwal.jam}',
+        );
       }
     }
   }
