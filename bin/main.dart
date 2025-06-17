@@ -9,17 +9,10 @@ import 'jadwal_latihan.dart';
 import 'fitur_jadwal.dart'; // ← Tambahkan ini
 import 'riwayat_latihan.dart'; // Pastikan file ini mendefinisikan class RiwayatLatihan
 
-void tandaiLatihanSelesai(JadwalLatihan jadwal, RiwayatLatihan riwayat) {
-  // Contoh implementasi sederhana
-  print('Latihan pada hari ${jadwal.hari} jam ${jadwal.jam} telah selesai.');
-  riwayat.tambahRiwayat(jadwal);
-}
-
 void main() {
   DataTim data = DataTim();
-  JadwalLatihan jadwalLatihan = JadwalLatihan(hari: 'Senin', jam: '08:00');
-  ManajemenJadwal manajemenJadwal = ManajemenJadwal(); // ← Tambahkan ini
   RiwayatLatihan riwayat = RiwayatLatihan();
+  ManajemenJadwal manajemenJadwal = ManajemenJadwal(data); // ← Tambahkan argumen kedua
 
   while (true) {
     print('\n=== MENU UTAMA ===');
@@ -27,7 +20,7 @@ void main() {
     print('2. Tambah Pemain ke Tim');
     print('3. Lihat Daftar Tim');
     print('4. Tambah Jadwal Latihan'); // ← Update menu
-    print('5. Lihat Jadwal Latihan');  // ← Update menu
+    print('5. Lihat Jadwal Latihan'); // ← Update menu
     print('6. Tandai Latihan Selesai');
     print('7. Lihat Riwayat Latihan');
     print('0. Keluar');
@@ -51,8 +44,60 @@ void main() {
         manajemenJadwal.tampilkanJadwal(); // ← Tampilkan jadwal latihan
         break;
       case '6':
-        tandaiLatihanSelesai(jadwalLatihan, riwayat);
+        // tampilkan daftar tim dan jadwalnya
+        if (data.isEmpty()) {
+          print('Belum ada tim terdaftar.');
+          break;
+        }
+
+        Node? current = data.head;
+        int index = 1;
+        List<String> daftarNamaTim = [];
+
+        print('\nPilih Tim yang akan menyelesaikan latihan:');
+        while (current != null) {
+          print('$index. ${current.data.namaTim}');
+          daftarNamaTim.add(current.data.namaTim);
+          current = current.next;
+          index++;
+        }
+
+        stdout.write('Nomor tim: ');
+        int? noTim = int.tryParse(stdin.readLineSync() ?? '');
+        if (noTim == null || noTim < 1 || noTim > daftarNamaTim.length) {
+          print('Pilihan tidak valid.');
+          break;
+        }
+
+        String namaTim = daftarNamaTim[noTim - 1];
+        List<JadwalLatihan>? daftarJadwal = manajemenJadwal.jadwalMap[namaTim];
+
+        if (daftarJadwal == null || daftarJadwal.isEmpty) {
+          print('Tim ini belum memiliki jadwal.');
+          break;
+        }
+
+        print('\nPilih Jadwal yang telah selesai:');
+        for (int i = 0; i < daftarJadwal.length; i++) {
+          print('${i + 1}. ${daftarJadwal[i].hari}, ${daftarJadwal[i].jam}');
+        }
+
+        stdout.write('Nomor jadwal: ');
+        int? noJadwal = int.tryParse(stdin.readLineSync() ?? '');
+        if (noJadwal == null ||
+            noJadwal < 1 ||
+            noJadwal > daftarJadwal.length) {
+          print('Pilihan tidak valid.');
+          break;
+        }
+
+        JadwalLatihan dipilih = daftarJadwal[noJadwal - 1];
+        manajemenJadwal.tandaiLatihanSelesai(namaTim, dipilih, riwayat);
+        daftarJadwal.removeAt(
+          noJadwal - 1,
+        ); // hapus dari jadwal setelah ditandai selesai
         break;
+
       case '7':
         riwayat.tampilkan();
         break;

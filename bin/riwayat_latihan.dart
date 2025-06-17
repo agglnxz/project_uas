@@ -1,3 +1,4 @@
+
 class RiwayatLatihan {
   final List<dynamic> _riwayat = [];
 
@@ -18,4 +19,7 @@ class RiwayatLatihan {
       }
     }
   }
+
+  
 }
+
