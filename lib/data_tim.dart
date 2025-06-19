@@ -1,5 +1,4 @@
 import 'package:project_uas/class_tim.dart';
-
 class Node {
   Tim data;
   Node? next;

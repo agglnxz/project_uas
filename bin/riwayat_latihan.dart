@@ -1,8 +1,8 @@
-
+import 'jadwal_latihan.dart';
 class RiwayatLatihan {
-  final List<dynamic> _riwayat = [];
+  final List<JadwalLatihan> _riwayat = [];
 
-  void tambahRiwayat(dynamic jadwal) {
+  void tambahRiwayat(JadwalLatihan jadwal) {
     _riwayat.add(jadwal);
   }
 
@@ -14,12 +14,11 @@ class RiwayatLatihan {
       for (var i = _riwayat.length - 1; i >= 0; i--) {
         var jadwal = _riwayat[i];
         print(
-          '${_riwayat.length - i}. Hari: ${jadwal.hari}, Jam: ${jadwal.jam}',
+          '${_riwayat.length - i}.Tim:${jadwal.tim.namaTim} Hari: ${jadwal.hari}, Jam: ${jadwal.jam}',
         );
       }
     }
   }
-
-  
+ 
 }
 

@@ -38,7 +38,8 @@ class ManajemenJadwal {
       return;
     }
 
-    String namaTim = daftarTim[pilihan - 1].namaTim;
+    Tim timDipilih = daftarTim[pilihan - 1];
+
 
     stdout.write('Masukkan hari latihan (cth: Senin): ');
     String? hari = stdin.readLineSync();
@@ -51,11 +52,13 @@ class ManajemenJadwal {
       return;
     }
 
-    JadwalLatihan jadwal = JadwalLatihan(hari: hari, jam: jam);
-    jadwalMap.putIfAbsent(namaTim, () => []);
-    jadwalMap[namaTim]!.add(jadwal);
+    JadwalLatihan jadwal = JadwalLatihan(hari: hari, jam: jam, tim: timDipilih);
 
-    print('Jadwal berhasil ditambahkan untuk tim "$namaTim".');
+    jadwalMap.putIfAbsent(timDipilih.namaTim, () => []);
+    jadwalMap[timDipilih.namaTim]!.add(jadwal);
+
+
+    print('Jadwal berhasil ditambahkan untuk tim "$timDipilih".');
   }
 
 void tampilkanJadwal() {
@@ -87,36 +90,6 @@ void tandaiLatihanSelesai(String namaTim, JadwalLatihan jadwal, RiwayatLatihan r
   print('Latihan tim "$namaTim" pada hari ${jadwal.hari} jam ${jadwal.jam} telah selesai.');
   riwayat.tambahRiwayat(jadwal);
 }
-
-
-
-  // void hapusJadwal() {
-  //   stdout.write('Masukkan nama tim yang ingin dihapus jadwalnya: ');
-  //   String? namaTim = stdin.readLineSync();
-
-  //   if (namaTim == null || !jadwalMap.containsKey(namaTim)) {
-  //     print('Tim tidak ditemukan.');
-  //     return;
-  //   }
-
-  //   List<JadwalLatihan> jadwalList = jadwalMap[namaTim]!;
-
-  //   for (int i = 0; i < jadwalList.length; i++) {
-  //     print('${i + 1}. ${jadwalList[i]}');
-  //   }
-
-  //   stdout.write('Pilih nomor jadwal yang ingin dihapus: ');
-  //   String? input = stdin.readLineSync();
-  //   int? index = int.tryParse(input ?? '');
-
-  //   if (index == null || index < 1 || index > jadwalList.length) {
-  //     print('Nomor tidak valid.');
-  //     return;
-  //   }
-
-  //   jadwalList.removeAt(index - 1);
-  //   print('Jadwal berhasil dihapus.');
-  // }
 
   Map<String, List<JadwalLatihan>> get jadwal => jadwalMap;
 }

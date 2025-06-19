@@ -4,8 +4,11 @@ class Tim {
   String namaTim;
   List<Pemain> daftarPemain;
 
+  // Constructor
+  // Jika daftarPemain tidak diberikan, inisialisasi dengan list kosong
   Tim(this.namaTim, [List<Pemain>? daftarPemain]) : daftarPemain = daftarPemain ?? [];
 }
+
 
 void tampilkanDaftarTim(DataTim dataTim) {
   if (dataTim.isEmpty()) {

@@ -18,7 +18,7 @@ void main() {
     print('\n=== MENU UTAMA ===');
     print('1. Tambah Tim');
     print('2. Tambah Pemain ke Tim');
-    print('3. Lihat Daftar Tim');
+    print('3. Lihat Daftar Tim & Pemain');
     print('4. Tambah Jadwal Latihan'); // ← Update menu
     print('5. Lihat Jadwal Latihan'); // ← Update menu
     print('6. Tandai Latihan Selesai');
